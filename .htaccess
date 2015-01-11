@@ -1,7 +1,8 @@
+# If the request is a file, folder or symlink that exists, serve it up
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)$ - [S=1]
 
-<ifModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !index
-    RewriteRule (.*) index.html [L]
+# otherwise, serve your index.html app
+RewriteRule ^(.+)$ /index.html
