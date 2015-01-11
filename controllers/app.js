@@ -9,14 +9,14 @@ me.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
 
         $routeProvider.
-                when('/', {
+                when('/me', {
                     templateUrl: 'templates/home.html',
                     controller: 'HomeController'
                 }).
-                when("/test", {
+                when("/me/test", {
                     templateUrl: "templates/test.html"
                 }).
                 otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/me'
                 });
     }]);
