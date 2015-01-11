@@ -13,9 +13,7 @@ me.config(['$routeProvider', '$locationProvider',
                     templateUrl: '/me/templates/home.html',
                     controller: 'HomeController'
                 }).
-                when("/me/test", {
-                    templateUrl: "/me/templates/test.html"
-                }).
+                
                 otherwise({
                     redirectTo: '/me'
                 });
