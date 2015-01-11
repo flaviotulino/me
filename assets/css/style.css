@@ -1,0 +1,59 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400);
+.navbar {
+  background-color: whitesmoke;
+  border-radius: 0px;
+  box-shadow: 0px 0px 1px 0px #ccc;
+  margin-bottom: 50px;
+}
+.navbar.navbar-default .navbar-brand {
+  color: #337ab7;
+}
+.navbar.navbar-default .navbar-brand:hover {
+  color: #285f8f !important;
+}
+.navbar.navbar-default ul li button a,
+.navbar.navbar-default ul li button a:hover {
+  color: white;
+  text-decoration: none;
+}
+.navbar.navbar-default ul li.active a {
+  background-color: whitesmoke;
+}
+.home-content {
+  font-size: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.home-content img {
+  float: left;
+  margin-right: 10px;
+  padding: 1.5px;
+}
+.home-content .desc {
+  text-align: justify;
+}
+.home-content .desc p {
+  margin-top: 10px;
+}
+.home-content .desc .highlight {
+  color: #285f8f;
+}
+.home-content .desc .my-name {
+  color: #337ab7;
+  font-size: 18px;
+}
+.home-content .desc h3 {
+  color: #337ab7;
+}
+.home-content .desc .getintouch i {
+  margin-right: 10px;
+}
+html,
+body {
+  font-family: "Lato", sans-serif;
+  background: whitesmoke;
+}
+.body {
+  padding-top: 50px;
+}
+/*# sourceMappingURL=style.css.map */
