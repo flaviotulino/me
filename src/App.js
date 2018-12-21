@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {GitHubService} from "./lib/GithubService";
 
 class App extends Component {
+  componentDidMount() {
+    GitHubService.getContent().then(response => {
+      console.log(response);
+    })
+  }
   render() {
     return (
       <div className="App">
