@@ -8,6 +8,11 @@ export class BlogService {
     return axios.get(url('contents/articles')).then(({data}) => {return data});
   }
 
+  static search(term) {
+    // TODO:
+    //https://api.github.com/search/code?q=first+in:articles+repo:flaviotulino/me+extension:.md
+  }
+
   static getArticles(category) {
     return axios
       .get(url(`contents/articles/${category}`))
