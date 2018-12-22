@@ -1,31 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {GitHubService} from "./lib/GithubService";
+import {BrowserRouter, Link, Route} from "react-router-dom";
+import CategoriesContainer from "./containers/CategoriesContainer";
+import ArticlesContainer from "./containers/ArticlesContainer";
+import ArticleContainer from "./containers/ArticleContainer";
 
 class App extends Component {
-  componentDidMount() {
-    GitHubService.getContent().then(response => {
-      console.log(response);
-    })
-  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="app">
+        <BrowserRouter>
+          <div>
+            <Link to={'/articles'}>Articles</Link>
+
+            <Route exact path={'/articles'} component={CategoriesContainer}/>
+            <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
+            <Route exact path={'/articles/:category/:article'} component={ArticleContainer}/>
+
+          </div>
+        </BrowserRouter>
       </div>
     );
   }
