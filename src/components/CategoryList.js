@@ -1,12 +1,12 @@
 import React from 'react';
 import CategoryListItem from "./CategoryListItem";
 
-const CategoryList = ({categories}) => (
+const CategoryList = ({categories, onSelect}) => (
   <div className="categories">
     {
       categories.map(category => (
           <div key={category.sha}>
-            <CategoryListItem category={category} />
+            <CategoryListItem category={category} onSelect={onSelect} />
           </div>
         )
       )

@@ -1,29 +1,38 @@
 import React, {Component} from 'react';
-import {BlogService} from "../lib/BlogService";
+import {BlogService} from "../services/BlogService";
 import CategoryList from "../components/CategoryList";
 import Loader from "../components/Loader";
+import {connect} from "react-redux";
+import {setCategories, setCategory} from "../actions/blog";
 
-export default class CategoriesContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: null
-    }
-  }
-
+class CategoriesContainer extends Component {
   componentDidMount() {
-    BlogService.getCategories().then(categories => {
-      this.setState({categories});
-    });
+    const {unsetCategory} = this.props;
+    unsetCategory();
   }
-
   render() {
-    if (!this.state.categories) return <Loader />;
+    const {categories, setCategory} = this.props;
+    if (!categories) return <Loader />;
 
     return (
       <div>
-        <CategoryList categories={this.state.categories} />
+        <CategoryList categories={categories} onSelect={setCategory} />
       </div>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  categories: state.blog.categories
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCategory(category) {
+    dispatch(setCategory(category));
+  },
+  unsetCategory() {
+    dispatch(setCategory(null));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer);

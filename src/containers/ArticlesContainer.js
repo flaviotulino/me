@@ -1,33 +1,53 @@
 import React, {Component} from 'react';
-import {BlogService} from "../lib/BlogService";
+import {BlogService} from "../services/BlogService";
 import ArticleList from "../components/ArticleList";
 import Loader from "../components/Loader";
+import {connect} from "react-redux";
+import {setArticle, setArticles, setCategory} from "../actions/blog";
+import {Redirect} from "react-router-dom";
 
-export default class ArticlesContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      articles: null
-    }
-  }
-
+class ArticlesContainer extends Component {
   async componentDidMount() {
-    const {category} = this.props.match.params;
+    const {category, setCategory, setArticles} = this.props;
+    setCategory(category);
 
     const articles = await BlogService.getArticles(category);
-    this.setState({articles});
+    setArticles(articles);
   }
 
   render() {
-    if (!this.state.articles) return <Loader />;
+    const {category, articles, setArticle, categories} = this.props;
 
-    const {category} = this.props.match.params;
+    if (!categories.find(cat => cat.name === category)) {
+      return <Redirect to={'/articles'} />;
+    }
+
+    if (!articles) return <Loader />;
 
     return (
       <div>
-        <ArticleList articles={this.state.articles} category={category}/>
+        <ArticleList articles={articles} category={category} onSelect={setArticle}/>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  articles: state.blog.articles,
+  category: ownProps.match.params.category,
+  categories: state.blog.categories
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCategory(category) {
+    dispatch(setCategory(category));
+  },
+  setArticles(articles) {
+    dispatch(setArticles(articles));
+  },
+  setArticle(article) {
+    dispatch(setArticle(article));
+  }
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(ArticlesContainer);

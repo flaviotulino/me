@@ -1,35 +1,66 @@
 import React, {Component} from 'react';
 import {markdown} from 'markdown';
-import {BlogService} from "../lib/BlogService";
+import {BlogService} from "../services/BlogService";
 import ReactSafeHtml from 'react-safe-html';
 import Loader from "../components/Loader";
+import {connect} from "react-redux";
+import {setArticle, setCategory, setCurrentArticle} from "../actions/blog";
+import CoverImage from "../components/CoverImage";
+import {Redirect} from "react-router-dom";
 
-export default class ArticleContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      article: null
-    }
-  }
+class ArticleContainer extends Component {
 
   componentDidMount() {
-    const {category, article} = this.props.match.params;
+    const {category, setCategory, article, setArticle, setCurrentArticle} = this.props;
+    setCategory(category);
+    setArticle(article);
+
     BlogService
       .getArticle({category, article})
-      .then(article => {
-        this.setState({article});
+      .then(currentArticle => {
+        setCurrentArticle(currentArticle);
       })
   }
 
   render() {
-    if (!this.state.article) return <Loader />;
+    const {currentArticle, category, categories} = this.props;
 
-    const content = markdown.toHTML(this.state.article.content);
+    if (!categories.find(cat => cat.name === category)) {
+      return <Redirect to={'/articles'} />;
+    }
+
+    if (!currentArticle) return <Loader />;
+
+    const content = markdown.toHTML(currentArticle.content);
     return (
       <div className="article">
-        <h1>{this.state.article.title}</h1>
+
+        <CoverImage image={currentArticle.cover.url} alt={currentArticle.cover.alt} />
+
+        <h1>{currentArticle.title}</h1>
         <ReactSafeHtml html={content}/>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  categories: state.blog.categories,
+  category: ownProps.match.params.category,
+  article: ownProps.match.params.article,
+  currentArticle: state.blog.currentArticle
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCategory(category) {
+    dispatch(setCategory(category));
+  },
+  setArticle(article) {
+    dispatch(setArticle(article));
+  },
+  setCurrentArticle(currentArticle) {
+    dispatch(setCurrentArticle(currentArticle));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer);
