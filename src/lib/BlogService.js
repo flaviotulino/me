@@ -21,7 +21,7 @@ export class BlogService {
         return Promise.all(articles.map(article => this.getArticleInfo({category, article: article.name})))
           .then((response) => {
             response.forEach((info, index) => {
-              articles[index] = {...articles[index], ...info.data}
+              articles[index] = {...articles[index], ...info}
             });
 
             return articles;
@@ -34,7 +34,7 @@ export class BlogService {
       .get(url(`contents/articles/${category}/${article}/info.json`))
       .then(response => {
         const {download_url} = response.data;
-        return axios.get(download_url);
+        return axios.get(download_url).then(({data}) => data);
       });
   }
 
