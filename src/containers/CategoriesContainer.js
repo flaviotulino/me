@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import {BlogService} from "../services/BlogService";
 import CategoryList from "../components/CategoryList";
 import Loader from "../components/Loader";
 import {connect} from "react-redux";
-import {setCategories, setCategory} from "../actions/blog";
+import {setCategory} from "../actions/blog";
 
 class CategoriesContainer extends Component {
   componentDidMount() {
-    const {unsetCategory} = this.props;
-    unsetCategory();
+      const {unsetCategory} = this.props;
+      unsetCategory();
   }
+
   render() {
     const {categories, setCategory} = this.props;
+
     if (!categories) return <Loader />;
 
     return (

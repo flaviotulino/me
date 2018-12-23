@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import ArticlesContainer from "./containers/ArticlesContainer";
 import ArticleContainer from "./containers/ArticleContainer";

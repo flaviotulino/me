@@ -1,8 +1,6 @@
 import {SET_ARTICLE, SET_ARTICLES, SET_CATEGORIES, SET_CATEGORY, SET_CURRENT_ARTICLE} from "../actions/blog";
 
 const blog = (state = {}, action) => {
-  console.log(action);
-
   switch (action.type) {
     case SET_CATEGORIES:
       const {categories} = action;
