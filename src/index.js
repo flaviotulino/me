@@ -1,23 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 
 import * as serviceWorker from './serviceWorker';
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import reducers from "./reducers";
 
 import 'bulma/css/bulma.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import NavBar from './components/NavBar';
+import SearchContainer from './containers/SearchContainer';
 
 const store = createStore(reducers);
 
 const app =
-  <Provider store={store}>
-    <BrowserRouter>
-      <Route path={'/'} component={App} />
-    </BrowserRouter>
-  </Provider>;
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                <NavBar/>
+                <Route path={'/'} component={App}/>
+            </div>
+        </BrowserRouter>
+    </Provider>;
 
 ReactDOM.render(app, document.getElementById('root'));
 

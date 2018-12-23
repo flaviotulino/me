@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { setArticle, setCategory } from "../actions/blog";
 import BreadcrumbList from '../components/BreadcrumbList';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
     category: state.blog.category,
@@ -17,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BreadcrumbList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BreadcrumbList));

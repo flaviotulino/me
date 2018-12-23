@@ -37,7 +37,7 @@ class ArticleContainer extends Component {
 
         <CoverImage image={currentArticle.cover.url} alt={currentArticle.cover.alt} />
 
-        <h1>{currentArticle.title}</h1>
+        <h1 className="title">{currentArticle.title}</h1>
         <ReactSafeHtml html={content}/>
       </div>
     )

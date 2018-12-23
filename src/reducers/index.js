@@ -1,8 +1,12 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 import blog from "./blog";
+import search from './search';
+import elements from './elements';
 
 const reducers = combineReducers({
-  blog
+    blog,
+    search,
+    elements
 });
 
 export default reducers;
