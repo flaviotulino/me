@@ -38,7 +38,7 @@ export class BlogService {
             .get(url(`contents/${category}`))
             .then((response) => {
                 const articles = response.data;
-                return Promise.all(articles.map(article => this.getArticleInfo({category, article: article.name})))
+                return Promise.all(articles.map(article => this.getArticle({category, article: article.name})))
                     .then((response) => {
                         response.forEach((info, index) => {
                             articles[index] = {...articles[index], ...info}

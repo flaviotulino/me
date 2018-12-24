@@ -10,7 +10,7 @@ class SearchBarContainer extends Component {
 
         const {history, query} = this.props;
         history.push({
-            pathname: '/search',
+            pathname: '/articles/search',
             search: `?q=${query}`
         });
     }

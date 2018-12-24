@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
     category: state.blog.category,
-    article: state.blog.article
+    article: state.blog.article,
+    currentArticle: state.blog.currentArticle
 });
 
 const mapDispatchToProps = dispatch => ({

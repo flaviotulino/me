@@ -1,3 +1,5 @@
+
+
 .lds {
     display: flex;
     align-items: center;
@@ -12,16 +14,17 @@
     height: 64px;
 }
 .lds-ring div {
+    @import "../variables";
     box-sizing: border-box;
     display: block;
     position: absolute;
     width: 50px;
     height: 50px;
     margin: 6px;
-    border: 2px solid red;
+    border: 2px solid $loader-color;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: red transparent transparent transparent;
+    border-color: $loader-color transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;

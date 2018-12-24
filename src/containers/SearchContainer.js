@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import Loader from '../components/Loader';
 import { BlogService } from '../services/BlogService';
 import { setResults } from '../actions/search';
-import SearchResultList from '../components/SearchResultList';
 import { setSearchBarAutofocus } from '../actions/elements';
+import ArticleList from '../components/ArticleList';
 
 class SearchContainer extends Component {
     async componentDidMount() {
@@ -17,7 +17,7 @@ class SearchContainer extends Component {
             return dispatchSearchBarAutoFocus();
         }
 
-        const results = await BlogService.search(history.location.search);
+        const results = await BlogService.search(history.location.search.replace(/\?q=/, ''));
 
         const getResults = results.items.map(async (result) => {
             const [category, article] = result.path.split('/');
@@ -52,7 +52,8 @@ class SearchContainer extends Component {
 
         return (
             <div className="search container">
-                <SearchResultList results={results}/>
+                <h1>I found {results.length} result{results.length > 1 ? 's': ''} for "{location.search.replace(/\?q=/, '')}"</h1>
+                <ArticleList articles={results} />
             </div>
         )
     }

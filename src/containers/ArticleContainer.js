@@ -6,7 +6,9 @@ import Loader from "../components/Loader";
 import { connect } from "react-redux";
 import { setArticle, setCategory, setCurrentArticle } from "../actions/blog";
 import CoverImage from "../components/CoverImage";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
+import './ArticleContainer.scss';
 
 class ArticleContainer extends Component {
 
@@ -17,8 +19,8 @@ class ArticleContainer extends Component {
 
         try {
             const currentArticle = await BlogService.getArticle({category, article});
-            console.log(currentArticle);
             setCurrentArticle(currentArticle);
+
         } catch (e) {
             history.push(`/articles/${category}`)
         }

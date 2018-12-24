@@ -7,11 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import reducers from "./reducers";
 
-import 'bulma/css/bulma.css';
+// import 'bulma/css/bulma.css';
 import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from './components/NavBar';
 
-import './index.css';
+import './index.scss';
 
 const store = createStore(reducers);
 

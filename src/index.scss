@@ -1,0 +1,13 @@
+@import "variables";
+@import "~bulma";
+
+html.has-breadcrumb-fixed-top.has-navbar-fixed-top {
+  padding-top: $navbar-height + 4rem;
+}
+
+.navbar-sub {
+  top: $navbar-height !important;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: 0 2px 5px -1px #ccc;
+}

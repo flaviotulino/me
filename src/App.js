@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import ArticlesContainer from "./containers/ArticlesContainer";
 import ArticleContainer from "./containers/ArticleContainer";
@@ -8,7 +8,7 @@ import { BlogService } from "./services/BlogService";
 import { setCategories } from "./actions/blog";
 import Loader from "./components/Loader";
 import SearchContainer from './containers/SearchContainer';
-import './App.css';
+import './App.scss';
 
 class App extends Component {
     async componentDidMount() {
@@ -24,11 +24,15 @@ class App extends Component {
 
         return (
             <div className="app">
-                <div className="container-fluid">
+                <div>
+
                     <Route exact path={'/articles'} component={CategoriesContainer}/>
-                    <Route exact path={'/search'} component={SearchContainer}/>
-                    <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
+                    <Switch>
+                        <Route exact path={'/articles/search'} component={SearchContainer}/>
+                        <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
+                    </Switch>
                     <Route exact path={'/articles/:category/:article'} component={ArticleContainer}/>
+
                 </div>
             </div>
         );

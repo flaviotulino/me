@@ -1,41 +1,44 @@
 import React from 'react';
 import BreadcrumbItem from './BreadcrumbItem';
+import './BreadcrumnList.scss';
 
-import './BreadcrumnList.css';
-
-const BreadcrumbList = ({category, unsetAll, article, unsetArticle, history}) => (
-    <nav className="breadcrumb has-background-white has-succeeds-separator is-medium" aria-label="breadcrumbs">
+const BreadcrumbList = ({category, unsetAll, article, unsetArticle, history, currentArticle}) => (
+    <nav className="navbar is-white is-fixed-top navbar-sub" role="navigation" aria-label="main breadcrumb">
         <div className="container">
-            <ul>
-                <BreadcrumbItem
-                    path={'/articles'}
-                    history={history}
-                    visible={true}
-                    onClick={unsetAll}>
-                    Articles
-                </BreadcrumbItem>
+            <nav className="breadcrumb has-background-white has-succeeds-separator is-medium" aria-label="breadcrumbs">
 
-                <BreadcrumbItem
-                    path={'/search'}
-                    history={history}>
-                    Search
-                </BreadcrumbItem>
+                <ul>
+                    {console.log(currentArticle)}
+                    <BreadcrumbItem
+                        path={'/articles'}
+                        history={history}
+                        visible={true}
+                        onClick={unsetAll}>
+                        Articles
+                    </BreadcrumbItem>
 
-                <BreadcrumbItem
-                    path={`/articles/${category}`}
-                    onClick={unsetArticle}
-                    history={history}
-                    visible={!!category}>
-                    {category}
-                </BreadcrumbItem>
+                    <BreadcrumbItem
+                        path={'/articles/search'}
+                        history={history}>
+                        Search
+                    </BreadcrumbItem>
 
-                <BreadcrumbItem
-                    history={history}
-                    path={`/articles/${category}/${article}`}
-                    visible={!!category && !!article}>
-                    {article}
-                </BreadcrumbItem>
-            </ul>
+                    <BreadcrumbItem
+                        path={`/articles/${category}`}
+                        onClick={unsetArticle}
+                        history={history}
+                        visible={!!category}>
+                        {category}
+                    </BreadcrumbItem>
+
+                    <BreadcrumbItem
+                        history={history}
+                        path={`/articles/${category}/${article}`}
+                        visible={!!currentArticle && !!category && !!article}>
+                        {currentArticle ? currentArticle.title : null}
+                    </BreadcrumbItem>
+                </ul>
+            </nav>
         </div>
     </nav>
 );
