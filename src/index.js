@@ -10,7 +10,8 @@ import reducers from "./reducers";
 import 'bulma/css/bulma.css';
 import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from './components/NavBar';
-import SearchContainer from './containers/SearchContainer';
+
+import './index.css';
 
 const store = createStore(reducers);
 

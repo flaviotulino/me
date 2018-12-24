@@ -3,17 +3,21 @@ import { BlogService } from "../services/BlogService";
 import ArticleList from "../components/ArticleList";
 import Loader from "../components/Loader";
 import { connect } from "react-redux";
-import { setArticle, setArticles, setCategory} from "../actions/blog";
-import { Redirect } from "react-router-dom";
+import { setArticle, setArticles, setCategory } from "../actions/blog";
+import { withRouter } from "react-router-dom";
 
 class ArticlesContainer extends Component {
     async componentDidMount() {
-        const {category, setCategory, setArticles} = this.props;
+        const {category, setCategory, setArticles, history} = this.props;
 
         setCategory(category);
 
-        const articles = await BlogService.getArticles(category);
-        setArticles(articles);
+        try {
+            const articles = await BlogService.getArticles(category);
+            setArticles(articles);
+        } catch (e) {
+            history.push('/articles');
+        }
     }
 
     componentDidUpdate() {
@@ -21,16 +25,12 @@ class ArticlesContainer extends Component {
     }
 
     render() {
-        const {category, articles, setArticle, categories} = this.props;
-
-        if (!categories.find(cat => cat.name === category)) {
-            return <Redirect to={'/articles'}/>;
-        }
+        const {category, articles, setArticle} = this.props;
 
         if (!articles) return <Loader/>;
 
         return (
-            <div>
+            <div className="articles container">
                 <ArticleList articles={articles} category={category} onSelect={setArticle}/>
             </div>
         )
@@ -58,4 +58,4 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticlesContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArticlesContainer));

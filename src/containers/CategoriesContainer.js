@@ -16,7 +16,7 @@ class CategoriesContainer extends Component {
     if (!categories) return <Loader />;
 
     return (
-      <div>
+      <div className="categories container">
         <CategoryList categories={categories} onSelect={setCategory} />
       </div>
     )

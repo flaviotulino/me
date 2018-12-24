@@ -3,19 +3,19 @@ import { Route } from "react-router-dom";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import ArticlesContainer from "./containers/ArticlesContainer";
 import ArticleContainer from "./containers/ArticleContainer";
-import BreadcrumbContainer from "./containers/BreadcrumbContainer";
 import { connect } from "react-redux";
 import { BlogService } from "./services/BlogService";
 import { setCategories } from "./actions/blog";
 import Loader from "./components/Loader";
 import SearchContainer from './containers/SearchContainer';
+import './App.css';
 
 class App extends Component {
-    componentDidMount() {
-        const {dispatch} = this.props;
-        BlogService.getCategories().then(categories => {
-            dispatch(setCategories(categories));
-        });
+    async componentDidMount() {
+        const {setCategories} = this.props;
+        const categories = await BlogService.getCategories();
+        setCategories(categories);
+
     }
 
     render() {
@@ -24,9 +24,7 @@ class App extends Component {
 
         return (
             <div className="app">
-                <div className="container">
-                    <BreadcrumbContainer/>
-
+                <div className="container-fluid">
                     <Route exact path={'/articles'} component={CategoriesContainer}/>
                     <Route exact path={'/search'} component={SearchContainer}/>
                     <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
@@ -41,5 +39,11 @@ const mapStateToProps = state => ({
     categories: state.blog.categories
 });
 
+const mapDispatchToProps = dispatch => ({
+    setCategories(categories) {
+        dispatch(setCategories(categories));
+    }
+});
 
-export default connect(mapStateToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

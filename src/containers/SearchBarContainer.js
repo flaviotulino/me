@@ -5,7 +5,9 @@ import { setQuery  } from '../actions/search';
 import { withRouter } from 'react-router-dom';
 
 class SearchBarContainer extends Component {
-    search() {
+    search(event) {
+        event.preventDefault();
+
         const {history, query} = this.props;
         history.push({
             pathname: '/search',

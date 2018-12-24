@@ -14,7 +14,7 @@ class SearchContainer extends Component {
         unsetAll();
 
         if (!location.search) {
-            dispatchSearchBarAutoFocus();
+            return dispatchSearchBarAutoFocus();
         }
 
         const results = await BlogService.search(history.location.search);
@@ -45,11 +45,13 @@ class SearchContainer extends Component {
     }
 
     render() {
-        const {results} = this.props;
+        const {results, location} = this.props;
+        if (!location.search) return false;
+
         if (!results) return <Loader/>;
 
         return (
-            <div>
+            <div className="search container">
                 <SearchResultList results={results}/>
             </div>
         )
