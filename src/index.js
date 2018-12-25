@@ -7,9 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import reducers from "./reducers";
 
-// import 'bulma/css/bulma.css';
 import { BrowserRouter, Route } from "react-router-dom";
-import NavBar from './components/NavBar';
 
 import './index.scss';
 
@@ -19,7 +17,6 @@ const app =
     <Provider store={store}>
         <BrowserRouter>
             <div>
-                <NavBar/>
                 <Route path={'/'} component={App}/>
             </div>
         </BrowserRouter>

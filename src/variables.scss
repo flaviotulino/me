@@ -1,7 +1,13 @@
 $widescreen: 960px !default;
 $desktop: 960px !default;
 
-@import "~bulma";
-$loader-color: $primary !default;
+$radius: 2px !default;
+
+@import "~bulma/sass/utilities/initial-variables";
+
+$navbar-tab-hover-border-bottom-color: $turquoise !default;
+$navbar-tab-active-border-bottom-color: $turquoise !default;
+
+$loader-color: $turquoise !default;
 $app-padding-top: 4rem;
 

@@ -9,6 +9,7 @@ import { setCategories } from "./actions/blog";
 import Loader from "./components/Loader";
 import SearchContainer from './containers/SearchContainer';
 import './App.scss';
+import NavBarContainer from './containers/NavBarContainer';
 
 class App extends Component {
     async componentDidMount() {
@@ -23,16 +24,19 @@ class App extends Component {
         if (!categories) return <Loader/>;
 
         return (
-            <div className="app">
-                <div>
+            <div>
+                <NavBarContainer/>
+                <div className="app">
+                    <div>
 
-                    <Route exact path={'/articles'} component={CategoriesContainer}/>
-                    <Switch>
-                        <Route exact path={'/articles/search'} component={SearchContainer}/>
-                        <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
-                    </Switch>
-                    <Route exact path={'/articles/:category/:article'} component={ArticleContainer}/>
+                        <Route exact path={'/articles'} component={CategoriesContainer}/>
+                        <Switch>
+                            <Route exact path={'/articles/search'} component={SearchContainer}/>
+                            <Route exact path={'/articles/:category'} component={ArticlesContainer}/>
+                        </Switch>
+                        <Route exact path={'/articles/:category/:article'} component={ArticleContainer}/>
 
+                    </div>
                 </div>
             </div>
         );

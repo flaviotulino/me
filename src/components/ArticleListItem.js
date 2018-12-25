@@ -37,7 +37,7 @@ const ArticleListItem = ({article}) => (
             <div className="card">
                 <div className="card-image">
                     <figure className="image is-4by3">
-                        <img src={article.cover.url}/>
+                        <img src={article.cover.url} alt={article.cover.alt}/>
                     </figure>
                 </div>
                 <div className="card-content">
