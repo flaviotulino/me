@@ -7,17 +7,19 @@ import { BlogService } from '../services/BlogService';
 import { setResults } from '../actions/search';
 import { setSearchBarAutofocus } from '../actions/elements';
 import ArticleList from '../components/ArticleList';
+import queryString from 'query-string';
+
 
 class SearchContainer extends Component {
     async componentDidMount() {
-        let {unsetAll, history, setResults, location, dispatchSearchBarAutoFocus} = this.props;
+        let {unsetAll, setResults, search, dispatchSearchBarAutoFocus} = this.props;
         unsetAll();
 
-        if (!location.search) {
+        if (!search) {
             return dispatchSearchBarAutoFocus();
         }
 
-        const results = await BlogService.search(history.location.search.replace(/\?q=/, ''));
+        const results = await BlogService.search(search);
 
         const getResults = results.items.map(async (result) => {
             const [category, article] = result.path.split('/');
@@ -45,22 +47,26 @@ class SearchContainer extends Component {
     }
 
     render() {
-        const {results, location} = this.props;
-        if (!location.search) return false;
+        const {results, search} = this.props;
+        if (!search) return false;
 
         if (!results) return <Loader/>;
 
         return (
             <div className="search container">
-                <h1>I found {results.length} result{results.length > 1 ? 's': ''} for "{location.search.replace(/\?q=/, '')}"</h1>
+                <h1 className="title">I found {results.length} result{results.length > 1 ? 's': ''} for "{search}"</h1>
                 <ArticleList articles={results} />
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    results: state.search.results
+const mapStateToProps = (state, {location}) => ({
+    results: state.search.results,
+    get search () {
+        const params = queryString.parse(location.search);
+        return params.q;
+    }
 });
 
 const mapDispatchToProps = dispatch => ({

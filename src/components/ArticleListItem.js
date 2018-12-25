@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { markdown } from 'markdown';
 import ReactSafeHtml from 'react-safe-html';
+import moment from 'moment';
 
 const getLink = (result) => {
     const [category, article] = result.path.split('/');
@@ -27,6 +28,9 @@ const getText = result => {
 
     return textContent;
 };
+
+const getDate = date => (moment(date).format('DD/MM/YYYY HH:mm'));
+
 const ArticleListItem = ({article}) => (
     <div className="article-list__item">
         <Link to={getLink(article)}>
@@ -37,7 +41,8 @@ const ArticleListItem = ({article}) => (
                     </figure>
                 </div>
                 <div className="card-content">
-                    <h1 className="title">{article.title}</h1>
+                    <h1 className="title is-4">{article.title}</h1>
+                    <h5 className="subtitle is-6 has-text-grey">{getDate(article.created_at)}</h5>
                     <ReactSafeHtml html={getText(article)}/>
                 </div>
             </div>
