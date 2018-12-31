@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "bulma": "^0.7.2",
     "classnames": "^2.2.6",
+    "eslint-config-airbnb": "^17.1.0",
     "markdown": "^0.5.0",
     "moment": "^2.23.0",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "query-string": "^5.1.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -20,8 +24,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src --fix"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -32,9 +40,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "axios": "^0.18.0",
     "node-sass": "^4.11.0",
-    "path": "^0.12.7",
+    "pre-commit": "^1.2.2",
     "sass-loader": "^7.1.0"
   }
 }

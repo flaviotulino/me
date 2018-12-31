@@ -7,25 +7,25 @@ export const SET_CURRENT_ARTICLE = 'SET_CURRENT_ARTICLE';
 
 export const setCategories = categories => ({
   type: SET_CATEGORIES,
-  categories
+  categories,
 });
 
 export const setCategory = category => ({
   type: SET_CATEGORY,
-  category
+  category,
 });
 
 export const setArticles = articles => ({
   type: SET_ARTICLES,
-  articles
+  articles,
 });
 
 export const setArticle = article => ({
   type: SET_ARTICLE,
-  article
+  article,
 });
 
 export const setCurrentArticle = currentArticle => ({
   type: SET_CURRENT_ARTICLE,
-  currentArticle
+  currentArticle,
 });

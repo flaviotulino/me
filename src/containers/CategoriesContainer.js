@@ -1,17 +1,18 @@
-import React, {Component} from 'react';
-import CategoryList from "../components/CategoryList";
-import Loader from "../components/Loader";
-import {connect} from "react-redux";
-import {setCategory} from "../actions/blog";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import CategoryList from '../components/CategoryList';
+import Loader from '../components/Loader';
+import { setCategory } from '../actions/blog';
 
 class CategoriesContainer extends Component {
   componentDidMount() {
-      const {unsetCategory} = this.props;
-      unsetCategory();
+    const { unsetCategory } = this.props;
+    unsetCategory();
   }
 
   render() {
-    const {categories, setCategory} = this.props;
+    const { categories, setCategory } = this.props;
 
     if (!categories) return <Loader />;
 
@@ -19,12 +20,12 @@ class CategoriesContainer extends Component {
       <div className="categories container">
         <CategoryList categories={categories} onSelect={setCategory} />
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  categories: state.blog.categories
+  categories: state.blog.categories,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -35,5 +36,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setCategory(null));
   },
 });
+
+CategoriesContainer.propTypes = {
+  unsetCategory: PropTypes.func,
+  setCategory: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.any),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer);
